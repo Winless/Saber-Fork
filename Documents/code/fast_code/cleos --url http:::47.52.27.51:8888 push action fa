@@ -1,0 +1,17 @@
+cleos --url http://47.52.27.51:8888 push action fastidentity signup '["100001","test1"]' -p fastidentity@account
+cleos --url http://47.52.27.51:8888 push action fastidentity signup '["100002","test2"]' -p fastidentity@account
+cleos --url http://47.52.27.51:8888 push action fastidentity signup '["100003","test3"]' -p fastidentity@account
+cleos --url http://47.52.27.51:8888 push action fastidentity signup '["100004","test4"]' -p fastidentity@account
+
+rest api
+regPayAccount  int receiveGate(收款方式 1 alipay, 2 wechat, 3 paypal), int receiveUnit(1 rmb 2 usd), string code(收款链接或者是收款码)
+createPayment  string toAccount(收款的fastId), float amount, string payUnit(1 rmb 2 usd), int payGate(付款方式 1 alipay, 2 wechat, 3 paypal)        //发送一个pay请求
+confirmPayment string payId //收款方确认交易
+takeFromOrder  string payId  //矿工抢买单
+takeToOrder    string payId  //矿工抢卖单
+confirmFromPay string payId //确认买单到账
+confirmToPay string payId //确认卖单到账
+
+socket 
+推送给用户
+newPayment //推送给4的收款通知

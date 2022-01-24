@@ -1,0 +1,27 @@
+specVersion: 0.0.2
+description: ""
+repository: ""
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: StableSwapPool
+    network: rinkeby
+    source:
+      address: "0xf6801b600dd30e516dfd1c823a9f57E04772b8b7"
+      abi: StableSwapPool
+      startBlock: 10042175
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - Token
+        - ExchangeEntity
+      abis:
+        - name: StableSwapPool
+          file: ./abis/StableSwapPool1.json
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange

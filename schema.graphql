@@ -1,0 +1,17 @@
+type Token @entity {
+  id: ID!
+  symbol: String!
+  decimals: BigInt!
+}
+
+type ExchangeEntity @entity {
+  id: ID!
+  token0: Token!
+  token1: Token!
+  token0SoldTokenAmount: BigDecimal!
+  token0BoughtTokenAmount: BigDecimal!
+  token1SoldTokenAmount: BigDecimal!
+  token1BoughtTokenAmount: BigDecimal!
+  timestamp: BigInt!
+  block: BigInt!
+}

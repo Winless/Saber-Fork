@@ -1,24 +1,35 @@
 import {TokenExchange} from '../generated/StableSwapPool/StableSwapPool'
 import {ExchangeEntity, Token} from '../generated/schema'
 import {BigInt} from "@graphprotocol/graph-ts";
-import {convertTokenToDecimal, ZERO_BD, ZERO_BI} from "./utils";
+import {convertTokenToDecimal, ZERO_BD} from "./utils";
+import {
+    tokenUSDC_decimals,
+    tokenUSDC_id,
+    tokenUSDC_symbol,
+    tokenUSDT_decimals,
+    tokenUSDT_id,
+    tokenUSDT_symbol
+} from "./token";
 
 
-export function handleTokenExchange(event: TokenExchange): void {
+export function handleUSDC2USDT(event: TokenExchange): void {
     let id = event.address.toHex()
     let entity = ExchangeEntity.load(id)
-    let token0 :Token
-    let token1:Token
     if (entity == null) {
-        token0 = new Token("0x85ed8780eec181b21e1057f840623f1e9e89924e")
-        token0.decimals = BigInt.fromString("6")
-        token0.symbol = "USDC"
-        token0.save()
-
-        token1 = new Token("0x71a4c56f9165f17cd4c940f37b88abd9c19f0f6d")
-        token1.decimals = BigInt.fromString("6")
-        token1.symbol = "USDT"
-        token1.save()
+        let token0 = Token.load(tokenUSDC_id)
+        if (token0 == null) {
+            token0 = new Token(tokenUSDC_id)
+            token0.decimals = tokenUSDC_decimals
+            token0.symbol = tokenUSDC_symbol
+            token0.save()
+        }
+        let token1 = Token.load(tokenUSDT_id)
+        if (token1 == null) {
+            token1 = new Token(tokenUSDT_id)
+            token1.decimals = tokenUSDT_decimals
+            token1.symbol = tokenUSDT_symbol
+            token1.save()
+        }
         entity = new ExchangeEntity(id)
         entity.token0 = token0.id
         entity.token1 = token1.id
@@ -27,6 +38,8 @@ export function handleTokenExchange(event: TokenExchange): void {
         entity.token1BoughtTokenAmount = ZERO_BD
         entity.token1SoldTokenAmount = ZERO_BD
     }
+    let token0 = Token.load(tokenUSDC_id)
+    let token1 = Token.load(tokenUSDT_id)
     if (event.params.bought_id == BigInt.fromString("0")) {
         let buyAmount = convertTokenToDecimal(event.params.tokens_bought, token0.decimals)
         let soldAmount = convertTokenToDecimal(event.params.tokens_sold, token1.decimals)

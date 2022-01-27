@@ -24,4 +24,4 @@ dataSources:
           file: ./abis/StableSwapPool1.json
       eventHandlers:
         - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
-          handler: handleTokenExchange
+          handler: handleUSDC2USDT

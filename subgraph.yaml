@@ -8,7 +8,7 @@ dataSources:
     name: StableSwapPool
     network: rinkeby
     source:
-      address: "0xf6801b600dd30e516dfd1c823a9f57E04772b8b7"
+      address: "0x25a8227206e037c74CfeC5Ad790E1991fBa0DC13"
       abi: StableSwapPool
       startBlock: 10042175
     mapping:

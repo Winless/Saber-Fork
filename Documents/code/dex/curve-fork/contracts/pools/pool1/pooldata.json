@@ -17,13 +17,13 @@
             "name": "USDC",
             "decimals": 6,
             "tethered": false,
-            "underlying_address": "0x85eD8780eeC181b21E1057F840623F1e9E89924e"
+            "underlying_address": "0x9Ed27eE971028226b0F31ce2249d079E6d998c37"
         },
         {
             "name": "USDT",
             "decimals": 6,
             "tethered": false,
-            "underlying_address": "0x71A4C56f9165f17cD4c940f37b88aBD9C19F0F6d"
+            "underlying_address": "0x4dAE7042D681274E184902c65bfFb0698DA10585"
         }
     ],
     "testing": {

@@ -15,6 +15,12 @@ reports:
 
 dependencies:
   - curvefi/curve-dao-contracts@1.2.0
+  - OpenZeppelin/openzeppelin-contracts@4.5.0
+compiler:
+  solc:
+    version: 0.8.4
+    remappings:
+        - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.5.0"
 
 hypothesis:
   phases:

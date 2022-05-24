@@ -1,7 +1,7 @@
 import {TokenExchange} from '../generated/StableSwapPool/StableSwapPool'
-import {AddRewardEntity, ExchangeEntity, Token} from '../generated/schema'
+import {AddRewardEntity, ExchangeEntity, Token, UserClaimEntity} from '../generated/schema'
 import {BigInt} from "@graphprotocol/graph-ts";
-import {convertTokenToDecimal, ZERO_BD} from "./utils";
+import {convertTokenToDecimal, ZERO_BD, ZERO_BI} from "./utils";
 import {
     tokenUSDC_decimals,
     tokenUSDC_id,
@@ -10,7 +10,7 @@ import {
     tokenUSDT_id,
     tokenUSDT_symbol
 } from "./token";
-import {AddReward} from "../generated/farm/farm";
+import {AddReward, ClaimReward} from "../generated/farm/farm";
 
 
 export function handleUSDC2USDT(event: TokenExchange): void {
@@ -64,5 +64,16 @@ export function handleAddReward(evt: AddReward): void {
     entity.timestamp = evt.block.timestamp
     entity.amount = evt.params.amount
     entity.duration = evt.params.duration
+    entity.save()
+}
+export function handleClaimReward(evt: ClaimReward): void {
+    let entity = UserClaimEntity.load(evt.params.user.toHex())
+    if (entity == null) {
+        entity =new UserClaimEntity(evt.params.user.toHex())
+        entity.amount = ZERO_BI
+    }
+    entity.block = evt.block.number
+    entity.timestamp = evt.block.timestamp
+    entity.amount = entity.amount.plus(evt.params.amount)
     entity.save()
 }

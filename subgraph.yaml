@@ -40,9 +40,12 @@ dataSources:
       file: ./src/mapping.ts
       entities:
         - AddRewardEntity
+        - UserClaimEntity
       abis:
         - name: farm
           file: ./abis/farm.json
       eventHandlers:
         - event: AddReward(uint256,uint256)
           handler: handleAddReward
+        - event: ClaimReward(address,uint256)
+          handler: handleClaimReward

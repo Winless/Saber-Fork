@@ -24,3 +24,9 @@ type AddRewardEntity @entity {
   timestamp: BigInt!
   block: BigInt!
 }
+type UserClaimEntity @entity {
+  id:ID!
+  amount: BigInt!
+  timestamp: BigInt!
+  block: BigInt!
+}

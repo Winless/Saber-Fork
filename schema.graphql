@@ -15,3 +15,12 @@ type ExchangeEntity @entity {
   timestamp: BigInt!
   block: BigInt!
 }
+
+
+type AddRewardEntity @entity {
+  id:ID!
+  amount: BigInt!
+  duration: BigInt!
+  timestamp: BigInt!
+  block: BigInt!
+}

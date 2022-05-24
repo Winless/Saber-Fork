@@ -1,5 +1,5 @@
 import {TokenExchange} from '../generated/StableSwapPool/StableSwapPool'
-import {ExchangeEntity, Token} from '../generated/schema'
+import {AddRewardEntity, ExchangeEntity, Token} from '../generated/schema'
 import {BigInt} from "@graphprotocol/graph-ts";
 import {convertTokenToDecimal, ZERO_BD} from "./utils";
 import {
@@ -10,6 +10,7 @@ import {
     tokenUSDT_id,
     tokenUSDT_symbol
 } from "./token";
+import {AddReward} from "../generated/farm/farm";
 
 
 export function handleUSDC2USDT(event: TokenExchange): void {
@@ -53,5 +54,15 @@ export function handleUSDC2USDT(event: TokenExchange): void {
     }
     entity.block = event.block.number
     entity.timestamp = event.block.timestamp
+    entity.save()
+}
+
+
+export function handleAddReward(evt: AddReward): void {
+    let entity = new AddRewardEntity(evt.transaction.hash.toHex())
+    entity.block = evt.block.number
+    entity.timestamp = evt.block.timestamp
+    entity.amount = evt.params.amount
+    entity.duration = evt.params.duration
     entity.save()
 }

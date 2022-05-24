@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: StableSwapPool
-    network: rinkeby
+    network: aavxT
     source:
-      address: "0x25a8227206e037c74CfeC5Ad790E1991fBa0DC13"
+      address: "0x9Bf8CF84EA6bA10A7D78186f56B5492d0761dD84"
       abi: StableSwapPool
-      startBlock: 10042175
+      startBlock: 9873852
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -19,9 +19,30 @@ dataSources:
       entities:
         - Token
         - ExchangeEntity
+        - AddRewardEntity
       abis:
         - name: StableSwapPool
           file: ./abis/StableSwapPool1.json
       eventHandlers:
         - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
           handler: handleUSDC2USDT
+  - kind: ethereum/contract
+    name: farm
+    network: aavxT
+    source:
+      address: "0x5F7532279Beb619DE8ee497CF948Ca1cdaB9c237"
+      abi: farm
+      startBlock: 9916164
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - AddRewardEntity
+      abis:
+        - name: farm
+          file: ./abis/farm.json
+      eventHandlers:
+        - event: AddReward(uint256,uint256)
+          handler: handleAddReward

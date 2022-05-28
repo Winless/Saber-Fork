@@ -8,7 +8,7 @@ dataSources:
     name: StableSwapPool
     network: aavxT
     source:
-      address: "0x9Bf8CF84EA6bA10A7D78186f56B5492d0761dD84"
+      address: "0xe38c6D233E266c63fc9ee691A8a14730108F451b"
       abi: StableSwapPool
       startBlock: 9873852
     mapping:
@@ -30,7 +30,7 @@ dataSources:
     name: farm
     network: aavxT
     source:
-      address: "0x5F7532279Beb619DE8ee497CF948Ca1cdaB9c237"
+      address: "0xc992Ff7D152D419596c30dCfc28110aED6C7dD87"
       abi: farm
       startBlock: 9916164
     mapping:
